@@ -14,5 +14,12 @@ module.exports = {
 			res.end('');	// 结束请求中状态,不写则没有http协议尾	
 		}
 		optfile.readfile('./views/zhuce.html',recall);
+	},
+	writefile:function(req,res){
+		function recall(data){
+			res.write(data);
+			res.end('');	// 结束请求中状态,不写则没有http协议尾	
+		}
+		optfile.writefile('./views/one.txt','我的写入文件',recall);
 	}
 }

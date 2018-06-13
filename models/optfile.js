@@ -17,4 +17,17 @@ module.exports = {
 			}
 		})
 	},
+	writefile:function(path,data,recall){ // 异步方法
+		fs.writeFile(path,data,function(err){
+			if(err){
+				throw err;
+			}
+			console.log('It\'s saved!'); // 文件被保存
+			recall('写文件成功')
+		})
+	},
+	writefileSync:function(path,data){ // 异步方法
+		fs.writeFile(path,data);
+		console.log('同步写文件完成');
+	},
 }
