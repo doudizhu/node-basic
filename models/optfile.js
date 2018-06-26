@@ -6,16 +6,16 @@ module.exports = {
 		console.log('同步方法执行完毕');
 	},
 	readfile:function(path,recall){ // 异步读取
-		var data = fs.readFileSync(path,'utf-8');
-		console.log('异步方法执行完毕');
 		fs.readFile(path,function(err,data){
 			if(err){
-				console.log(err);
+				console.log('bbbbb='+err);
+				recall('文件不存在'); // 异步错误捕获
 			}else{
 				console.log(data.toString());
 				recall(data);
 			}
 		})
+		console.log('异步方法执行完毕');
 	},
 	writefile:function(path,data,recall){ // 异步方法
 		fs.writeFile(path,data,function(err){
