@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var str = 'fiqdfjlsjfd;jH{name}ello{age}sdaf{name};lk';
+		// var re = /{.{1,}\}/i;
+		// var re = /{name+\}/i;
+		var re = /{name+\}/g;
+		// var re = /{.*?\}/g; // *表匹配前面的子表达式零次或多次，？表匹配前面的子表达式零次或一次
+		window.onload = function(){
+			// if(re.test(str)){
+			// 	alert('含有')
+			// }else{
+			// 	alert('没有')
+			// }
+
+			NewStr = str.replace(re,'张三');
+			alert(NewStr);
+		}
+	</script>
+</body>
+</html>
