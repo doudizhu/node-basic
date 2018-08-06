@@ -32,12 +32,23 @@ module.exports = {
 		// 注意异步
 		req.on('end',function(){ // 在end事件触发后，通过querystring.parse将post解析为真正的POST请求格式，然后向客户端返回。
 			post = querystring.parse(post);
-			console.log('收到参数：'+post['email']+'\n');
-			console.log('收到参数：'+post['pwd']+'\n');
-
-			// 方式一：
-			recall = getRecall(req,res);
+			// console.log('收到参数：'+post['email']+'\n');
+			// console.log('收到参数：'+post['pwd']+'\n');
+			arr = ['email','pwd']
+			function recall(data){
+				dataStr = data.toString();
+				for(var i=0;i<arr.length;i++){
+					re = new RegExp('{'+arr[i]+'}','g') // /\{name\}/g
+					dataStr = dataStr.replace(re,post[arr[i]]);
+				}
+				res.write(dataStr);
+				res.end('');// 不写则没有http协议尾
+			}
 			optfile.readfile('./views/login.html',recall);
+
+			// // 方式一：
+			// recall = getRecall(req,res);
+			// optfile.readfile('./views/login.html',recall);
 		})
 		// // 方式二：
 		// recall = getRecall(req,res);
