@@ -41,10 +41,26 @@ function exec(){
 	async.series(
 		{
 			one:function(done){
-				done(null,'one完毕')
+				ii=0;
+				setInterval(function(){
+					console.log("aaa="+new Date());
+					ii++;
+					if(ii==3){
+						clearInterval(this);
+						done(null,'one完毕')
+					}
+				}, 1000);
 			},
 			two:function(done){
-				done(null,'two完毕')
+				jj=0;
+				setInterval(function(){
+					console.log("bbb="+new Date());
+					jj++;
+					if(jj==3){
+						clearInterval(this);
+						done(null,'two完毕')
+					}
+				}, 1000);
 			}
 		},
 		// 回调结果集
