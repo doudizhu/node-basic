@@ -1,9 +1,10 @@
+/*
+// 1.同步嵌套执行
 function oneFun() {
-	/*
-	setTimeout(function(){
+	
+	// setTimeout(function(){
 
-	},1000)
-	*/
+	// },1000)
 
 	ii=0;
 	setInterval(function(){
@@ -29,4 +30,29 @@ function twoFun() {
 }
 oneFun();
 // twoFun();
+console.log("主进程执行完毕");
+*/
+
+
+
+// 2.异步：串行无关联
+var async = require('async');
+function exec(){
+	async.series(
+		{
+			one:function(done){
+				done(null,'one完毕')
+			},
+			two:function(done){
+				done(null,'two完毕')
+			}
+		},
+		// 回调结果集
+		function(err,rs){
+			console.log(err);
+			console.log(rs);
+		}
+	)
+}
+exec();
 console.log("主进程执行完毕");
