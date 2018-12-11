@@ -74,7 +74,7 @@ exec();
 console.log("主进程执行完毕");
 */
 
-
+/*
 // 3.异步：并行无关联
 var async = require('async');
 function exec(){
@@ -103,6 +103,47 @@ function exec(){
 				}, 1000);
 			}
 		},
+		// 回调结果集
+		function(err,rs){
+			console.log(err);
+			console.log(rs);
+		}
+	)
+}
+exec();
+console.log("主进程执行完毕");
+*/
+
+
+// 4.串行有关联
+var async = require('async');
+function exec(){
+	async.waterfall(
+		[
+			function(done){
+				ii=0;
+				setInterval(function(){
+					console.log("aaa="+new Date());
+					ii++;
+					if(ii==3){
+						clearInterval(this);
+						done(null,'one完毕')
+					}
+				}, 1000);
+			},
+			function(preValue,done){
+				jj=0;
+				setInterval(function(){
+					console.log(preValue+"="+new Date());
+					console.log("bbb="+new Date());
+					jj++;
+					if(jj==3){
+						clearInterval(this);
+						done(null,preValue+',two完毕')
+					}
+				}, 1000);
+			}
+		],
 		// 回调结果集
 		function(err,rs){
 			console.log(err);
